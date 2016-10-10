@@ -1,0 +1,13 @@
+package com.cbsgenesis.classwork.module_1_2.lection10;
+
+import java.util.Comparator;
+
+/**
+ * Created by Barbarizzz on 08.10.2016.
+ */
+public class ProductName implements Comparator<Product> {
+    @Override
+    public int compare(Product product1,Product product2) {
+        return product1.getName().compareTo(product2.getName());
+    }
+}
