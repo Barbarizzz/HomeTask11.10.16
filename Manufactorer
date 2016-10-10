@@ -1,0 +1,39 @@
+package com.cbsgenesis.classwork.module_1_2.lection10;
+
+import java.util.TreeSet;
+
+/**
+ * Created by Barbarizzz on 06.10.2016.
+ */
+public class Manufactorer {
+    private String name;
+    private TreeSet<Product> treeSet1;
+
+    public Manufactorer() {
+    }
+
+    public Manufactorer(String name) {
+        this.name = name;
+    }
+
+    public TreeSet<Product> getTreeSet1() {
+        return treeSet1;
+    }
+
+    public void setTreeSet1(TreeSet<Product> treeSet1) {
+        this.treeSet1 = treeSet1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name + ":" + treeSet1;
+    }
+}
