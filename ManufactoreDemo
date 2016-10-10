@@ -1,0 +1,158 @@
+package com.cbsgenesis.classwork.module_1_2.lection10;
+
+import com.cbsgenesis.classwork.module_1_2.lection9.developertask.Manafacture;
+import com.cbsgenesis.homework.SortDeveloper.Developer;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import java.util.*;
+
+/**
+ * Created by Barbarizzz on 06.10.2016.
+ */
+public class ManufcorerDemo {
+    public static void main(String[] args) {
+
+
+        List<Manufactorer> manufacturers = createManufacturers();
+
+        Integer choice = 0;
+        System.out.println("===========================================");
+        System.out.println("Menu");
+        System.out.println("1 - Информация о доступных продуктах Sony");
+        System.out.println("2 - Отсортировать продукты Sony по имени");
+        System.out.println("3 - Отсортировать продукты Sony по цене");
+        System.out.println("4 - Информация о доступных продуктах Samsung");
+        System.out.println("5 - Отсортировать продукты Samsung по имени");
+        System.out.println("6 - Отсортировать продукты Samsung по цене");
+        System.out.println("7 - exit");
+        System.out.println("===========================================");
+        System.out.println("Введите нужный пункт в меню");
+        Scanner scanner = new Scanner(System.in);
+
+        while (choice!=3){
+            choice = scanner.nextInt();
+            switch (choice){
+                case 1:
+                    System.out.println(findManufacturerByName(manufacturers, "sony").getTreeSet1());
+                    break;
+                case 2:
+                    sortProductNameSony();
+                    showManufacturerProducts();
+                    break;
+                case 3:
+                    System.out.println(findManufacturerByName(manufacturers, "sony").getTreeSet1());
+                   sortSalarySony();
+                    break;
+                case 4:
+                    System.out.println(findManufacturerByName(manufacturers, "samsung").getTreeSet1());
+                    break;
+                case 5:
+                    System.out.println(findManufacturerByName(manufacturers, "samsung").getTreeSet1());
+                    sortProductNameSamsung();
+                    break;
+                case 6:
+                    sortSalarySamsung();
+                    System.out.println(findManufacturerByName(manufacturers, "samsung").getTreeSet1());
+                    break;
+                case 7:
+                    break;
+                default:
+                    System.out.println("Извените такого пункта в меню не существует.Попробуйте снова");
+                    break;
+            }
+        }
+    }
+
+    private static List<Manufactorer> createManufacturers(){
+        List<Manufactorer> manufacturers = new ArrayList<>();
+        Manufactorer sony = new Manufactorer("Sony");
+        Manufactorer samsung = new Manufactorer("Samsung");
+
+        sony.setTreeSet1(createSonyProducts());
+        samsung.setTreeSet1(createSamsungProducts());
+
+        manufacturers.add(sony);
+        manufacturers.add(samsung);
+
+        return manufacturers;
+    }
+
+    private static TreeSet<Product> createSonyProducts(){
+        TreeSet<Product> products = new TreeSet<>();
+        Product sonyTV = new Product("Sony TV",15000);
+        Product sonyPhone = new Product("Sony Phone",5000);
+        Product sonyPlayer=new Product("Sony Player",3000);
+        Product sonyTablet=new Product("Sony Tablet",6000);
+
+
+        products.add(sonyTV);
+        products.add(sonyPhone);
+        products.add(sonyPlayer);
+        products.add(sonyTablet);
+
+        return products;
+    }
+
+    private static TreeSet<Product> createSamsungProducts(){
+        TreeSet<Product> products = new TreeSet<>();
+        Product samsungTV = new Product("Samsung TV",14000);
+        Product samsungPhone = new Product("Samsung Phone",7000);
+        Product samsungMicrowave=new Product("Samsung Microwave",8500);
+        Product samsungTablet=new Product("Samsung Tablet",9000);
+
+
+        products.add(samsungPhone);
+        products.add(samsungTV);
+        products.add(samsungMicrowave);
+        products.add(samsungTablet);
+
+        return products;
+    }
+
+    private static void showManufacturerProducts(Manufactorer manufacturer){
+        System.out.print(manufacturer.getTreeSet1());
+    }
+
+
+    private static Manufactorer findManufacturerByName(List<Manufactorer> manufacturers, String name){
+        Manufactorer manufacturer = new Manufactorer();
+        for (int i = 0; i< manufacturers.size(); i++){
+            if(manufacturers.get(i).getName().equalsIgnoreCase(name)){
+                manufacturer = manufacturers.get(i);
+            }
+        }
+        return manufacturer;
+
+    }
+
+    public static void sortSalarySony()
+    {
+        TreeSet<Product>products=new TreeSet<>(new ProductSalary());
+        createSonyProducts();
+
+
+    }
+
+    public static void sortSalarySamsung()
+    {
+        TreeSet<Product>products=new TreeSet<>(new ProductSalary());
+        createSamsungProducts();
+
+    }
+
+    public static void sortProductNameSony()
+    {
+        TreeSet<Product>products=new TreeSet<>(new ProductName());
+        createSonyProducts();
+
+    }
+
+    public static void sortProductNameSamsung()
+    {
+        TreeSet<Product>products=new TreeSet<>(new ProductName());
+        createSamsungProducts();
+
+    }
+
+
+
